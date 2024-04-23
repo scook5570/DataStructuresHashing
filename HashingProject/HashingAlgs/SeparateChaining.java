@@ -1,63 +1,62 @@
 package HashingProject.HashingAlgs;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.Math;
 
 public class SeparateChaining {
     HashNode[] map;
-    int[] tracker;
+    public int tracker;
+    public int searchTracker;
     int size;
 
     public SeparateChaining(int size) {
         this.size = size;
         map = new HashNode[size];
-        tracker = new int[size];
+        tracker = 0;
     }
 
     public void addNode(String value) {
         int key = Math.abs(value.hashCode()) % size;
         HashNode node = new HashNode(value);
     
-        tracker[key]++;
+        tracker++;
     
         if (map[key] != null) {
             HashNode current = map[key];
             while (current.next != null) {
+                tracker++;
                 current = current.next;
             }
+            tracker++;
             current.next = node;
         } else {
             map[key] = node;
         }
     }
 
-    public void printMapToFile(File location) throws IOException {
-        FileWriter writer = new FileWriter(location);
-        writer.write("Seperate Chaining Results " + size + ":\n");
-        for (int i = 0; i < size; i++) {
-            if (map[i] == null) {
-                writer.write("null\n");
-            } else  {
-                HashNode node = map[i];
-                while (node != null) {
-                    writer.write(node.value);
-                    if (node.next != null) {
-                        writer.write(" --> ");
-                    }
-                    node = node.next;
+    public int search(String[] values) {
+        searchTracker = 0;
+        for (String value : values) {
+            int key = Math.abs(value.hashCode()) % size;
+            HashNode node = new HashNode(value);
+
+            searchTracker++;
+            if (map[key] != node) {
+                HashNode current = map[key];
+                while (current.next != node) {
+                    searchTracker++;
+                    current = current.next;
                 }
-                writer.write("\n");
+                searchTracker++;
+                current.next = node;
             }
         }
-        writer.write("--------------------------------------------");
+        return searchTracker;
     }
 }
 
 class HashNode {
-    String value;
-    HashNode next;
+    public String value;
+    public HashNode next;
     
     HashNode(String value) {
         this.next = null;
