@@ -26,15 +26,14 @@ public class LinearProbing {
 
     public int search(String[] values) {
         searchTracker = 0;
-
+    
         for(String value : values) {
             int key = Math.abs(value.hashCode()) % size;
-        
-            while (map[key] != value) {
+            
+            while (!map[key].equals(value)) {
                 searchTracker++;
-                key = (key+1)%size;
+                key = (key + 1) % size;
             }
-
             searchTracker++;
         }
         return searchTracker;

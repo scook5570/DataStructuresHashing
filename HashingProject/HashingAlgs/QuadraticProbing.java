@@ -27,15 +27,15 @@ public class QuadraticProbing {
         map[key] = value;
     }
 
-    public int searchTracker(String[] values) {
+    public int search(String[] values) {
         searchTracker = 0;
         for (String value : values) {
             int key = Math.abs(value.hashCode()) % size;
             int i = 1;
-
-            while (map[key] != value) {
+    
+            while (!map[key].equals(value)) {
                 searchTracker++;
-                key = (key + (i * i))%size;
+                key = (key + (i * i)) % size;
                 i++;
             }
             searchTracker++;

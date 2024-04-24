@@ -35,20 +35,14 @@ public class SeparateChaining {
 
     public int search(String[] values) {
         searchTracker = 0;
-        for (String value : values) {
-            int key = Math.abs(value.hashCode()) % size;
-            HashNode node = new HashNode(value);
-
-            searchTracker++;
-            if (map[key] != node) {
-                HashNode current = map[key];
-                while (current.next != node) {
-                    searchTracker++;
-                    current = current.next;
-                }
+        for (String item : values) {
+            int key = Math.abs(item.hashCode()) % size;
+            HashNode current = map[key];
+            while (!current.value.equals(item)) {
                 searchTracker++;
-                current.next = node;
+                current = current.next;
             }
+            searchTracker++;
         }
         return searchTracker;
     }

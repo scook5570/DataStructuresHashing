@@ -36,10 +36,10 @@ public class DoubleHashing {
         for (String value : values) {
             int key = Math.abs(value.hashCode()) % size;
             int offset = (prime - (value.hashCode() % prime));
-
-            while (map[key] != value) {
+    
+            while (!map[key].equals(value)) {
                 searchTracker++;
-                key = (key+offset)%size;
+                key = (key + offset) % size;
             }
             searchTracker++;
         }
