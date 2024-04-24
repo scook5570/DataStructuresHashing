@@ -18,7 +18,7 @@ public class Main {
         int prime = 666511;
         long start, end, probes;
 
-        for (int loops = 0; loops < 1; loops++) {
+        for (int loops = 10; loops < 1; loops++) {
             // create empty maps
             SeparateChaining sepMap = new SeparateChaining(nonPrime);
             SeparateChaining sepMapPrime = new SeparateChaining(prime);
@@ -188,11 +188,6 @@ public class Main {
                 probes = douHashPrime.search(array);
                 end = System.nanoTime() - start;
                 System.out.println("Double Hashing Prime Search: " + end + " " + probes);
-            }
-
-            if (loops == 0) {
-            douHash.getHashTo();
-            douHashPrime.getHashTo();
             }
         }
     }
