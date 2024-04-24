@@ -4,14 +4,14 @@ public class DoubleHashing {
     int size;
     int prime;
     String[] map;
-    public int tracker;
+    public int tracker[];
     public int searchTracker;
     String value;
 
     public DoubleHashing(int size) {
         this.size = size;
         map = new String[size];
-        tracker = 0;
+        tracker = new int[size];
         prime = size - 1;
         while (!isPrime(prime)) {
             prime--;
@@ -23,11 +23,11 @@ public class DoubleHashing {
         int offset = (prime - (value.hashCode() % prime));
 
         while (map[key] != null) {
-            tracker++;
+            tracker[key]++;
             key = (key+offset)%size;
         }
 
-        tracker++;
+        tracker[key]++;
         map[key] = value;
     }
 
@@ -57,5 +57,34 @@ public class DoubleHashing {
             }
         }
         return true;
+    }
+
+    public int getSum() {
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            sum += tracker[i];
+        }
+        return sum;
+    }
+
+    public void getHashTo() {
+        int max = 0;
+        for (int i = 0; i < size; i++) {
+            if (tracker[i] > max) {
+                max = tracker[i];
+            }
+        }
+
+        for (int i = 0; i < max + 1; i++) {
+            int sum = 0;
+            for (int j = 0; j < size; j++) {
+                if (i == tracker[j]) {
+                    sum++;
+                }
+            }
+            if (sum != 0){
+                System.out.println(i + "->" + sum);
+            }
+        }
     }
 }

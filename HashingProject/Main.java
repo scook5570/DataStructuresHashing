@@ -18,7 +18,7 @@ public class Main {
         int prime = 666511;
         long start, end, probes;
 
-        for (int loops = 0; loops < 10; loops++) {
+        for (int loops = 0; loops < 1; loops++) {
             // create empty maps
             SeparateChaining sepMap = new SeparateChaining(nonPrime);
             SeparateChaining sepMapPrime = new SeparateChaining(prime);
@@ -54,7 +54,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             sepScanner.close();
-            System.out.println("Separate Chaining: " + end + " " + sepMap.tracker);
+            System.out.println("Separate Chaining: " + end + " " + sepMap.getSum());
 
             // separate chaining
             Scanner sepPrimeScanner = new Scanner(words);
@@ -65,7 +65,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             sepPrimeScanner.close();
-            System.out.println("Separate Chaining Prime: " + end + " " + sepMapPrime.tracker);
+            System.out.println("Separate Chaining Prime: " + end + " " + sepMapPrime.getSum());
 
             // linear probing
             Scanner linScanner = new Scanner(words);
@@ -76,7 +76,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             linScanner.close();
-            System.out.println("Linear Probing: " + end + " " + linProbe.tracker);
+            System.out.println("Linear Probing: " + end + " " + linProbe.getSum());
 
             // linear probing
             Scanner linPrimeScanner = new Scanner(words);
@@ -87,7 +87,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             linPrimeScanner.close();
-            System.out.println("Linear Probing Prime: " + end + " " + linProbePrime.tracker);
+            System.out.println("Linear Probing Prime: " + end + " " + linProbePrime.getSum());
 
             // quadratic probing
             Scanner quaScanner = new Scanner(words);
@@ -98,7 +98,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             quaScanner.close();
-            System.out.println("Quadratic Probing: " + end + " " + quaProbe.tracker);
+            System.out.println("Quadratic Probing: " + end + " " + quaProbe.getSum());
 
             // quadratic probing
             Scanner quaPrimeScanner = new Scanner(words);
@@ -109,7 +109,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             quaPrimeScanner.close();
-            System.out.println("Quadratic Probing Prime: " + end + " " + quaProbePrime.tracker);
+            System.out.println("Quadratic Probing Prime: " + end + " " + quaProbePrime.getSum());
 
             // double hashing
             Scanner douScanner = new Scanner(words);
@@ -120,7 +120,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             douScanner.close();
-            System.out.println("Double Hashing: " + end + " " + douHash.tracker);
+            System.out.println("Double Hashing: " + end + " " + douHash.getSum());
 
             // double hashing
             Scanner douPrimeScanner = new Scanner(words);
@@ -131,7 +131,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             douPrimeScanner.close();
-            System.out.println("Double Hashing Prime: " + end + " " + douHashPrime.tracker);
+            System.out.println("Double Hashing Prime: " + end + " " + douHashPrime.getSum());
 
             // search functions for each
             for (String[] array : arrays) {
@@ -188,6 +188,11 @@ public class Main {
                 probes = douHashPrime.search(array);
                 end = System.nanoTime() - start;
                 System.out.println("Double Hashing Prime Search: " + end + " " + probes);
+            }
+
+            if (loops == 0) {
+            douHash.getHashTo();
+            douHashPrime.getHashTo();
             }
         }
     }
