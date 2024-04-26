@@ -18,7 +18,7 @@ public class Main {
         int prime = 666511;
         long start, end, probes;
 
-        for (int loops = 10; loops < 1; loops++) {
+        for (int loops = 0; loops < 1; loops++) {
             // create empty maps
             SeparateChaining sepMap = new SeparateChaining(nonPrime);
             SeparateChaining sepMapPrime = new SeparateChaining(prime);
