@@ -6,6 +6,7 @@ public class DoubleHashing {
     String[] map;
     public int tracker[];
     public int searchTracker;
+    public int[] wordProbes = new int[466551];
     String value;
 
     public DoubleHashing(int size) {
@@ -18,13 +19,14 @@ public class DoubleHashing {
         }
     }
 
-    public void addNode(String value) {
+    public void addNode(String value, int n) {
         int key = Math.abs(value.hashCode()) % size;
         int offset = (prime - (value.hashCode() % prime));
 
         while (map[key] != null) {
+            wordProbes[n]++;
             tracker[key]++;
-            key = (key+offset)%size;
+            key = (key + offset) % size;
         }
 
         tracker[key]++;
@@ -36,7 +38,7 @@ public class DoubleHashing {
         for (String value : values) {
             int key = Math.abs(value.hashCode()) % size;
             int offset = (prime - (value.hashCode() % prime));
-    
+
             while (!map[key].equals(value)) {
                 searchTracker++;
                 key = (key + offset) % size;
@@ -49,7 +51,7 @@ public class DoubleHashing {
     public boolean isPrime(int number) {
         if (number <= 1) {
             return false;
-        } 
+        }
 
         for (int i = 2; i <= Math.sqrt(number); i++) {
             if (number % i == 0) {
@@ -82,7 +84,7 @@ public class DoubleHashing {
                     sum++;
                 }
             }
-            if (sum != 0){
+            if (sum != 0) {
                 System.out.println(i + "->" + sum);
             }
         }

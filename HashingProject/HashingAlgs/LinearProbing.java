@@ -5,6 +5,7 @@ public class LinearProbing {
     String[] map;
     public int[] tracker;
     public int searchTracker;
+    public int[] wordProbes = new int[466551];
     String value;
 
     public LinearProbing(int size) {
@@ -13,12 +14,13 @@ public class LinearProbing {
         tracker = new int[size];
     }
 
-    public void addNode(String value) {
+    public void addNode(String value, int n) {
         int key = Math.abs(value.hashCode()) % size;
-        
+
         while (map[key] != null) {
+            wordProbes[n]++;
             tracker[key]++;
-            key = (key+1)%size;
+            key = (key + 1) % size;
         }
 
         tracker[key]++;
@@ -27,10 +29,10 @@ public class LinearProbing {
 
     public int search(String[] values) {
         searchTracker = 0;
-    
-        for(String value : values) {
+
+        for (String value : values) {
             int key = Math.abs(value.hashCode()) % size;
-            
+
             while (!map[key].equals(value)) {
                 searchTracker++;
                 key = (key + 1) % size;

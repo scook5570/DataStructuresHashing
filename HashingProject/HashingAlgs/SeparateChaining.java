@@ -6,6 +6,7 @@ public class SeparateChaining {
     HashNode[] map;
     public int[] tracker;
     public int searchTracker;
+    public int[] wordProbes = new int[466551];
     int size;
 
     public SeparateChaining(int size) {
@@ -14,15 +15,16 @@ public class SeparateChaining {
         tracker = new int[size];
     }
 
-    public void addNode(String value) {
+    public void addNode(String value, int n) {
         int key = Math.abs(value.hashCode()) % size;
         HashNode node = new HashNode(value);
-    
+
         tracker[key]++;
-    
+
         if (map[key] != null) {
             HashNode current = map[key];
             while (current.next != null) {
+                wordProbes[n]++;
                 tracker[key]++;
                 current = current.next;
             }
@@ -75,11 +77,10 @@ public class SeparateChaining {
     }
 }
 
-
 class HashNode {
     public String value;
     public HashNode next;
-    
+
     HashNode(String value) {
         this.next = null;
         this.value = value;

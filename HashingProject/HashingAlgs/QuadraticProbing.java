@@ -5,6 +5,7 @@ public class QuadraticProbing {
     String[] map;
     public int[] tracker;
     public int searchTracker;
+    public int[] wordProbes = new int[466551];
     String value;
 
     public QuadraticProbing(int size) {
@@ -13,13 +14,14 @@ public class QuadraticProbing {
         tracker = new int[size];
     }
 
-    public void addNode(String value) {
+    public void addNode(String value, int n) {
         int key = Math.abs(value.hashCode()) % size;
         int i = 1;
 
         while (map[key] != null) {
+            wordProbes[n]++;
             tracker[key]++;
-            key = (key + (i * i))%size;
+            key = (key + (i * i)) % size;
             i++;
         }
 
@@ -32,7 +34,7 @@ public class QuadraticProbing {
         for (String value : values) {
             int key = Math.abs(value.hashCode()) % size;
             int i = 1;
-    
+
             while (!map[key].equals(value)) {
                 searchTracker++;
                 key = (key + (i * i)) % size;
