@@ -1,6 +1,7 @@
 package HashingProject.HashingAlgs;
 
-import java.lang.Math;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SeparateChaining {
     HashNode[] map;
@@ -17,9 +18,9 @@ public class SeparateChaining {
     public void addNode(String value) {
         int key = Math.abs(value.hashCode()) % size;
         HashNode node = new HashNode(value);
-    
+
         tracker[key]++;
-    
+
         if (map[key] != null) {
             HashNode current = map[key];
             while (current.next != null) {
@@ -31,6 +32,9 @@ public class SeparateChaining {
         } else {
             map[key] = node;
         }
+
+        // Write value and probe count to file
+        // writeToFile(key, tracker[key]);
     }
 
     public int search(String[] values) {
@@ -43,6 +47,9 @@ public class SeparateChaining {
                 current = current.next;
             }
             searchTracker++;
+
+            // Write value and probe count to file
+            // writeToFile(key, searchTracker);
         }
         return searchTracker;
     }
@@ -63,23 +70,40 @@ public class SeparateChaining {
             }
         }
 
-        for (int i = 0; i < max + 1; i++) {
-            int sum = 0;
-            for (int j = 0; j < size; j++) {
-                if (i == tracker[j]) {
-                    sum++;
+        try {
+            FileWriter writer = new FileWriter("hashes_per_index_separatechaining.txt", true);
+            for (int i = 0; i < max + 1; i++) {
+                int sum = 0;
+                for (int j = 0; j < size; j++) {
+                    if (i == tracker[j]) {
+                        sum++;
+                    }
+                }
+                if (sum != 0) {
+                    writer.write(i + "->" + sum + "\n");
                 }
             }
-            System.out.println(i + "->" + sum);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeToFile(int key, int probes) {
+        try {
+            FileWriter writer = new FileWriter("probe_counts_separatechaining.txt", true);
+            writer.write(key + "," + probes + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
 
-
 class HashNode {
     public String value;
     public HashNode next;
-    
+
     HashNode(String value) {
         this.next = null;
         this.value = value;

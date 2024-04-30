@@ -8,17 +8,17 @@ import java.util.Scanner;
 import HashingProject.HashingAlgs.*;
 
 public class Main {
-    // load factor 0.5 = 466551/933102
+    // load factor 0.5 = 466551/933102 - 933073 (prime version)
     // load factor 0.7 = 466551/666502 - 666511 (prime version)
     static final File words = new File("Resources/words.txt");
 
     public static void main(String args[]) throws IOException {
         // map sizes and timing
-        int nonPrime = 933102;
+        int nonPrime = 933102; // swap later
         int prime = 666511;
         long start, end, probes;
 
-        for (int loops = 10; loops < 1; loops++) {
+        for (int loops = 0; loops < 1; loops++) { // change loops as needed
             // create empty maps
             SeparateChaining sepMap = new SeparateChaining(nonPrime);
             SeparateChaining sepMapPrime = new SeparateChaining(prime);
@@ -54,6 +54,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             sepScanner.close();
+            sepMap.getHashTo();
             System.out.println("Separate Chaining: " + end + " " + sepMap.getSum());
 
             // separate chaining
@@ -65,6 +66,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             sepPrimeScanner.close();
+            sepMapPrime.getHashTo();
             System.out.println("Separate Chaining Prime: " + end + " " + sepMapPrime.getSum());
 
             // linear probing
@@ -76,6 +78,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             linScanner.close();
+            linProbe.getHashTo();
             System.out.println("Linear Probing: " + end + " " + linProbe.getSum());
 
             // linear probing
@@ -87,6 +90,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             linPrimeScanner.close();
+            linProbePrime.getHashTo();
             System.out.println("Linear Probing Prime: " + end + " " + linProbePrime.getSum());
 
             // quadratic probing
@@ -98,6 +102,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             quaScanner.close();
+            quaProbe.getHashTo();
             System.out.println("Quadratic Probing: " + end + " " + quaProbe.getSum());
 
             // quadratic probing
@@ -109,6 +114,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             quaPrimeScanner.close();
+            quaProbePrime.getHashTo();
             System.out.println("Quadratic Probing Prime: " + end + " " + quaProbePrime.getSum());
 
             // double hashing
@@ -120,6 +126,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             douScanner.close();
+            douHash.getHashTo();
             System.out.println("Double Hashing: " + end + " " + douHash.getSum());
 
             // double hashing
@@ -131,6 +138,7 @@ public class Main {
             }
             end = System.nanoTime() - start;
             douPrimeScanner.close();
+            douHashPrime.getHashTo();
             System.out.println("Double Hashing Prime: " + end + " " + douHashPrime.getSum());
 
             // search functions for each
