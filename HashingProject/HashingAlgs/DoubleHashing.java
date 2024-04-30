@@ -9,6 +9,7 @@ public class DoubleHashing {
     String[] map;
     public int tracker[];
     public int searchTracker;
+    public int[] wordProbes = new int[466551];
     String value;
 
     public DoubleHashing(int size) {
@@ -21,12 +22,13 @@ public class DoubleHashing {
         }
     }
 
-    public void addNode(String value) {
+    public void addNode(String value, int n) {
         int key = Math.abs(value.hashCode()) % size;
         int offset = (prime - (value.hashCode() % prime));
         int probes = 0;
 
         while (map[key] != null) {
+            wordProbes[n]++;
             tracker[key]++;
             probes++;
             key = (key + offset) % size;
@@ -88,32 +90,16 @@ public class DoubleHashing {
             }
         }
 
-        try {
-            FileWriter writer = new FileWriter("hashes_per_index_doublehashing.txt", true);
-            for (int i = 0; i < max + 1; i++) {
-                int sum = 0;
-                for (int j = 0; j < size; j++) {
-                    if (i == tracker[j]) {
-                        sum++;
-                    }
-                }
-                if (sum != 0) {
-                    writer.write(i + "->" + sum + "\n");
+        for (int i = 0; i < max + 1; i++) {
+            int sum = 0;
+            for (int j = 0; j < size; j++) {
+                if (i == tracker[j]) {
+                    sum++;
                 }
             }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void writeToFile(int key, int probes) {
-        try {
-            FileWriter writer = new FileWriter("probe_counts_doublehashing.txt", true);
-            writer.write(key + "," + probes + "\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (sum != 0){
+                System.out.println(i + "->" + sum);
+            }
         }
     }
 }

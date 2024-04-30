@@ -29,7 +29,7 @@ public class Main {
             DoubleHashing douHash = new DoubleHashing(nonPrime);
             DoubleHashing douHashPrime = new DoubleHashing(prime);
 
-            // arrays to hold search values 
+            // arrays to hold search values
             String[] search10 = new String[10];
             String[] search20 = new String[20];
             String[] search30 = new String[30];
@@ -41,18 +41,21 @@ public class Main {
             popArr(search40);
             popArr(search50);
 
-            String[][] arrays = {search10, search20, search30, search40, search50};
+            String[][] arrays = { search10, search20, search30, search40, search50 };
 
             // fill maps with hashing methods
+            int i = 0;
 
             // separate chaining
             Scanner sepScanner = new Scanner(words);
             start = System.nanoTime();
             while (sepScanner.hasNextLine()) {
                 String input = sepScanner.nextLine();
-                sepMap.addNode(input);
+                sepMap.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             sepScanner.close();
             sepMap.getHashTo();
             System.out.println("Separate Chaining: " + end + " " + sepMap.getSum());
@@ -62,9 +65,11 @@ public class Main {
             start = System.nanoTime();
             while (sepPrimeScanner.hasNextLine()) {
                 String input = sepPrimeScanner.nextLine();
-                sepMapPrime.addNode(input);
+                sepMapPrime.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             sepPrimeScanner.close();
             sepMapPrime.getHashTo();
             System.out.println("Separate Chaining Prime: " + end + " " + sepMapPrime.getSum());
@@ -74,9 +79,11 @@ public class Main {
             start = System.nanoTime();
             while (linScanner.hasNextLine()) {
                 String input = linScanner.nextLine();
-                linProbe.addNode(input);
+                linProbe.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             linScanner.close();
             linProbe.getHashTo();
             System.out.println("Linear Probing: " + end + " " + linProbe.getSum());
@@ -86,9 +93,11 @@ public class Main {
             start = System.nanoTime();
             while (linPrimeScanner.hasNextLine()) {
                 String input = linPrimeScanner.nextLine();
-                linProbePrime.addNode(input);
+                linProbePrime.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             linPrimeScanner.close();
             linProbePrime.getHashTo();
             System.out.println("Linear Probing Prime: " + end + " " + linProbePrime.getSum());
@@ -98,9 +107,11 @@ public class Main {
             start = System.nanoTime();
             while (quaScanner.hasNextLine()) {
                 String input = quaScanner.nextLine();
-                quaProbe.addNode(input);
+                quaProbe.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             quaScanner.close();
             quaProbe.getHashTo();
             System.out.println("Quadratic Probing: " + end + " " + quaProbe.getSum());
@@ -110,9 +121,11 @@ public class Main {
             start = System.nanoTime();
             while (quaPrimeScanner.hasNextLine()) {
                 String input = quaPrimeScanner.nextLine();
-                quaProbePrime.addNode(input);
+                quaProbePrime.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             quaPrimeScanner.close();
             quaProbePrime.getHashTo();
             System.out.println("Quadratic Probing Prime: " + end + " " + quaProbePrime.getSum());
@@ -122,9 +135,11 @@ public class Main {
             start = System.nanoTime();
             while (douScanner.hasNextLine()) {
                 String input = douScanner.nextLine();
-                douHash.addNode(input);
+                douHash.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             douScanner.close();
             douHash.getHashTo();
             System.out.println("Double Hashing: " + end + " " + douHash.getSum());
@@ -134,9 +149,11 @@ public class Main {
             start = System.nanoTime();
             while (douPrimeScanner.hasNextLine()) {
                 String input = douPrimeScanner.nextLine();
-                douHashPrime.addNode(input);
+                douHashPrime.addNode(input, i);
+                i++;
             }
             end = System.nanoTime() - start;
+            i = 0;
             douPrimeScanner.close();
             douHashPrime.getHashTo();
             System.out.println("Double Hashing Prime: " + end + " " + douHashPrime.getSum());
