@@ -15,7 +15,7 @@ public class Main {
     public static void main(String args[]) throws IOException {
         // map sizes and timing
         int nonPrime = 666502; // swap later
-        int prime = 666511;
+        int prime = 933102;
         long start, end, probes;
 
         for (int loops = 0; loops < 1; loops++) { // change loops as needed
@@ -30,7 +30,7 @@ public class Main {
             DoubleHashing douHashPrime = new DoubleHashing(prime);
 
             // arrays to hold search values
-            //String[] search10 = new String[10];
+            // String[] search10 = new String[10];
             String[] search20 = new String[20];
             String[] search30 = new String[30];
             String[] search40 = new String[40];
@@ -41,7 +41,7 @@ public class Main {
             popArr(search40);
             popArr(search50);
 
-            String[] search10 = {"Z"};
+            String[] search10 = { "Z" };
 
             String[][] arrays = { search10, search20, search30, search40, search50 };
 
