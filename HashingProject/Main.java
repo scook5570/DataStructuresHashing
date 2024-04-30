@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String args[]) throws IOException {
         // map sizes and timing
-        int nonPrime = 933102; // swap later
+        int nonPrime = 666502; // swap later
         int prime = 666511;
         long start, end, probes;
 

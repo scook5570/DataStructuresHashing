@@ -83,23 +83,24 @@ public class DoubleHashing {
     }
 
     public void getHashTo() {
-        int max = 0;
-        for (int i = 0; i < size; i++) {
-            if (tracker[i] > max) {
-                max = tracker[i];
+        try {
+            FileWriter writer = new FileWriter("hashes_per_index_doublehashing.txt");
+            for (int i = 0; i < size; i++) {
+                writer.write(i + "->" + tracker[i] + "\n");
             }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        for (int i = 0; i < max + 1; i++) {
-            int sum = 0;
-            for (int j = 0; j < size; j++) {
-                if (i == tracker[j]) {
-                    sum++;
-                }
-            }
-            if (sum != 0){
-                System.out.println(i + "->" + sum);
-            }
+    private void writeToFile(int key, int probes) {
+        try {
+            FileWriter writer = new FileWriter("probe_counts_doublehashing.txt", true);
+            writer.write(key + "," + probes + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -62,23 +62,10 @@ public class LinearProbing {
     }
 
     public void getHashTo() {
-        int max = 0;
-        for (int i = 0; i < size; i++) {
-            if (tracker[i] > max) {
-                max = tracker[i];
-            }
-        }
-
         try {
-            FileWriter writer = new FileWriter("hashes_per_index_linearprobing.txt", true);
-            for (int i = 0; i < max + 1; i++) {
-                int sum = 0;
-                for (int j = 0; j < size; j++) {
-                    if (i == tracker[j]) {
-                        sum++;
-                    }
-                }
-                writer.write(i + "->" + sum + "\n");
+            FileWriter writer = new FileWriter("hashes_per_index_linearprobing.txt");
+            for (int i = 0; i < size; i++) {
+                writer.write(i + "->" + tracker[i] + "\n");
             }
             writer.close();
         } catch (IOException e) {
